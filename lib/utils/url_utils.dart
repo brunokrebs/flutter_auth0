@@ -3,11 +3,11 @@ import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
 
-const String DOMAIN = "flutterapp.auth0.com";
-const String CLIENT_ID = "client_id_here";
-const String AUDIENCE = "https://$DOMAIN/api/v2/";
-const String SCOPES = "openid profile email";
-const String REDIRECT_URI = "myapp://logincallback";
+const String DOMAIN = "domain";
+const String CLIENT_ID = "client_id";
+const String AUDIENCE = "audience";
+const String SCOPES = "scopes";
+const String REDIRECT_URI = "redirect_uri";
 
 String codeVerifier;
 String codeChallenge;
