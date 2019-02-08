@@ -27,27 +27,3 @@ void launchURL(BuildContext context, {String url}) async {
     debugPrint(e.toString());
   }
 }
-
-// ///To get the access code
-// Future<Null> getAuthCode(BuildContext context) async {
-//   StreamSubscription _sub;
-//   String initialLink;
-//   String accessCode;
-
-//   AuthBloc authBloc = AppProvider.of(context).authBloc;
-//   try {
-//     initialLink = await getInitialLink();
-//     _sub = getLinksStream().listen((String link) {
-//       initialLink = link;
-//       authBloc.input.add(initialLink);
-//     }, onError: (err) {
-//       // authBloc.input.add("error");
-//     }, onDone: () {
-//       _sub.cancel();
-//     });
-//   } on PlatformException {
-//     // Handle exception by warning the user their action did not succeed
-//     // return?
-//   }
-//   return accessCode;
-// }
