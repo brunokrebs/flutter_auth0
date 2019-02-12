@@ -17,26 +17,18 @@ class ProfileBloc extends SimpleBloc<AppState> {
     AppState state,
     Action action,
   ) async {
+    Function showUserDetails = (accessToken) async {
+      await getUserDetails(accessToken).then((user) {
+        dispatch(DisplayDetailsAction(user: user));
+      });
+    };
+
     if (action is GetNewTokensAction) {
-      String accessToken;
-      await getNewTokens(action.authCode).then((tokenValue) {
-        accessToken = tokenValue;
-      }).whenComplete(() async {
-        await getUserDetails(accessToken).then((user) {
-          dispatch(DisplayDetailsAction(user: user));
-        });
-      });
+      await getNewTokens(action.authCode).then(showUserDetails);
+    } else if (action is GetAccessFromRefreshTokenAction) {
+      await getAccessFromRefreshTokens(action.refreshToken).then(showUserDetails);
     }
-    if (action is GetAccessFromRefreshTokenAction) {
-      String accessToken;
-      await getAccessFromRefreshTokens(action.refreshToken).then((tokenValue) {
-        accessToken = tokenValue;
-      }).whenComplete(() async {
-        await getUserDetails(accessToken).then((user) {
-          dispatch(DisplayDetailsAction(user: user));
-        });
-      });
-    }
+    
     return super.middleware(dispatch, state, action);
   }
 
