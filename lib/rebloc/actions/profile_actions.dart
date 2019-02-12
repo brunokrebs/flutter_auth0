@@ -7,10 +7,10 @@ class DisplayDetailsAction extends Action {
   const DisplayDetailsAction({this.user});
 }
 
-class GetNewTokensAction extends Action {
+class GetTokensFromAuthAction extends Action {
   final String authCode;
 
-  const GetNewTokensAction({this.authCode});
+  const GetTokensFromAuthAction({this.authCode});
 }
 
 class GetAccessFromRefreshTokenAction extends Action{

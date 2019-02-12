@@ -1,3 +1,4 @@
+/// User object model
 class User {
   final String pictureUrl;
   final String name;

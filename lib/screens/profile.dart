@@ -20,7 +20,7 @@ class Profile extends StatelessWidget {
     return Center(
       child: FirstBuildDispatcher<AppState>(
         action: isAuthCode == true
-            ? GetNewTokensAction(authCode: code)
+            ? GetTokensFromAuthAction(authCode: code)
             : GetAccessFromRefreshTokenAction(refreshToken: code),
         child: ViewModelSubscriber<AppState, ProfileState>(
           converter: (state) => state.profileState,

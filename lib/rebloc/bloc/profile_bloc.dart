@@ -17,7 +17,7 @@ class ProfileBloc extends SimpleBloc<AppState> {
     AppState state,
     Action action,
   ) async {
-    if (action is GetNewTokensAction) {
+    if (action is GetTokensFromAuthAction) {
       String accessToken;
       await getNewTokens(action.authCode).then((tokenValue) {
         accessToken = tokenValue;
@@ -51,8 +51,7 @@ class ProfileBloc extends SimpleBloc<AppState> {
   }
 }
 
-///MAKE SURE YO PASSING NECESSARY PARAMETERS
-/// To get the access token and refresh token using auth code
+/// To get the access token and refresh token using authorization code
 Future<String> getNewTokens(String authCode) async {
   String accessToken = "";
   String refreshToken = "";
@@ -64,14 +63,11 @@ Future<String> getNewTokens(String authCode) async {
     "code": authCode,
     "redirect_uri": REDIRECT_URI,
   });
-  print("\n\n\nThe received access token response is ${response.body}\n\n\n");
   if (response.statusCode == 200) {
     Map jsonMap = json.decode(response.body);
     accessToken = jsonMap['access_token'];
     refreshToken = jsonMap['refresh_token'];
     await storeRefreshToken(refreshToken: refreshToken);
-    print("The refresh token is $refreshToken\n\n\n");
-    print("The access token is $accessToken\n\n\n");
   } else {
     throw Exception('Failed to get access token');
   }
@@ -79,7 +75,6 @@ Future<String> getNewTokens(String authCode) async {
 }
 
 //To get access token from refresh token
-///CHANGE NECESSARY PARAMETERS
 Future<String> getAccessFromRefreshTokens(String refreshToken) async {
   String accessCode = "";
   var url = "https://$DOMAIN/oauth/token";
@@ -88,7 +83,6 @@ Future<String> getAccessFromRefreshTokens(String refreshToken) async {
     "client_id": CLIENT_ID,
     "refresh_token": refreshToken,
   });
-  print("\n\n\nThe received access token response is ${response.body}\n\n\n");
   if (response.statusCode == 200) {
     Map jsonMap = json.decode(response.body);
     accessCode = jsonMap['access_token'];
@@ -104,7 +98,6 @@ Future<User> getUserDetails(String accessToken) async {
   var url = "https://$DOMAIN/userinfo";
   final response =
       await http.get(url, headers: {"authorization": "Bearer $accessToken"});
-  print("\n\n\nThe received user details response is ${response.body}\n\n\n");
   if (response.statusCode == 200) {
     Map jsonMap = json.decode(response.body);
     var name = jsonMap['name'];

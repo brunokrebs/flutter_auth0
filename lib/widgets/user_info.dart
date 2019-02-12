@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// Custom text widget for displaying user details such
+/// as nickname and name
 class UserInfoText extends StatelessWidget {
   final String label;
   final String value;

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+/// Widget for displaying user's profile picture
+/// fetched from network using access token
 class ProfilePic extends StatelessWidget {
   final double pictureSize;
   final String pictureURL;

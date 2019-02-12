@@ -3,6 +3,7 @@ import 'package:flutterapp/rebloc/state/main_state.dart';
 import 'package:flutterapp/rebloc/state/profile_state.dart';
 import 'package:meta/meta.dart'; 
 
+
 @immutable
 class AppState {
   final MainState mainState; 

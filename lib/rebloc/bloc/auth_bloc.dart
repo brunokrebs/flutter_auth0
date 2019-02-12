@@ -25,7 +25,6 @@ class AuthBloc extends SimpleBloc<AppState> {
           (String link) {
             receivedLink = link;
 
-            print("The received link is $receivedLink");
             if (receivedLink.startsWith("myapp://logincallback")) {
               AuthModel authDetails = parseUrlToValue(receivedLink);
               dispatch(LoginAction(

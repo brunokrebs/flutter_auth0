@@ -4,7 +4,6 @@ import 'package:flutterapp/rebloc/actions/auth_actions.dart';
 import 'package:flutterapp/rebloc/actions/main_actions.dart';
 import 'package:flutterapp/rebloc/models/enums.dart';
 import 'package:flutterapp/rebloc/state/app_state.dart';
-import 'package:flutterapp/rebloc/state/main_state.dart';
 import 'package:flutterapp/utils/persistence.dart';
 import 'package:rebloc/rebloc.dart';
 
@@ -17,7 +16,6 @@ class MainBloc extends SimpleBloc<AppState> {
   ) async {
     if (action is OnInitAction) {
       await getRefreshToken().then((refreshToken) {
-        print("The retrieved refresh token is $refreshToken \n\n\n");
         if (refreshToken != null && refreshToken.isNotEmpty) {
           dispatcher(SilentLoginAction(refreshToken: refreshToken));
         }
@@ -33,17 +31,6 @@ class MainBloc extends SimpleBloc<AppState> {
       return state.copyWith(
         mainState: _mainState.copyWith(newScreenType: ScreenType.loggedOut),
       );
-      // final hasToken = false;
-
-      // if (hasToken) {
-      //   return state.copyWith(
-      //     mainState: _mainState.copyWith(newScreenType: ScreenType.loggedIn),
-      //   );
-      // } else {
-      //   return state.copyWith(
-      //     mainState: _mainState.copyWith(newScreenType: ScreenType.loggedOut),
-      //   );
-      // }
     }
     if (action is SilentLoginAction) {
       return state.copyWith(

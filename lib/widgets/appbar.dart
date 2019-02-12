@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutterapp/rebloc/models/enums.dart';
 import 'package:flutterapp/rebloc/state/app_state.dart';
-import 'package:flutterapp/rebloc/state/main_state.dart';
 import 'package:rebloc/rebloc.dart';
 
+/// Appbar lifted up the widget tree such that 
+/// one appbar can be reused for login screen
+/// and home screen based on certain conditions
 class CustomAppBar extends StatelessWidget implements PreferredSize {
   Widget build(BuildContext context) {
     return AppBar(
