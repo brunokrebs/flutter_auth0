@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutterapp/rebloc/actions/main_actions.dart';
 import 'package:flutterapp/rebloc/models/enums.dart';
 import 'package:flutterapp/rebloc/state/app_state.dart';
-import 'package:flutterapp/rebloc/state/main_state.dart';
 import 'package:flutterapp/rebloc/store.dart';
 import 'package:flutterapp/screens/login.dart';
 import 'package:flutterapp/screens/profile.dart';
@@ -45,9 +44,6 @@ class _MyHomePageState extends State<MyHomePage> {
         child: ViewModelSubscriber<AppState, AppState>(
           converter: (state) => state,
           builder: (context, dispatcher, viewModel) {
-            //used for when you need to automatically login
-            //also modify the code requesting for access token in the BLOC
-
             if (viewModel.mainState.screenType == ScreenType.loggedIn) {
               String refreshToken = viewModel.mainState.refreshToken;
               return Profile(
@@ -76,10 +72,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-///where to change
-///main.dart //done I think
-// /main_bloc.dart //halfway done
-///profile.dart //done I think
-///profile_bloc.dart //halfway done, remains parameters fixing for each request
-///profile_actions.dart //done I think 

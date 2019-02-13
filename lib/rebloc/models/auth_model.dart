@@ -1,3 +1,4 @@
+/// Authentication object model.
 class AuthModel {
   final bool isAuthenticated;
   final String authCode;

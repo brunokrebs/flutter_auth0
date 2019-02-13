@@ -1,11 +1,9 @@
-import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_tabs/flutter_custom_tabs.dart';
-import 'package:uni_links/uni_links.dart';
 
-import 'package:flutter/services.dart' show PlatformException;
 
+/// To launch the authorization URL using ChromeCustomTabs
 void launchURL(BuildContext context, {String url}) async {
   try {
     await launch(
